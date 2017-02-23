@@ -83,6 +83,7 @@ chmod 444 intermediate/certs/ca-chain.cert.pem
 ### Create server certificate
 cd /root/ca
 # Generate server key
+# Private key is not encrypted - use -aes256 to specify a password
 openssl genrsa -out intermediate/private/${SERVER_CERT_CN}.key.pem 4096
 chmod 400 intermediate/private/${SERVER_CERT_CN}.key.pem
 

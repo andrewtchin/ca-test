@@ -37,6 +37,9 @@ openssl x509 -req -extfile openssl.cnf \
 chmod 444 certs/ca.cert.pem
 openssl x509 -noout -text -in certs/ca.cert.pem
 
+# Output CRT format
+openssl x509 -in certs/ca.cert.pem -inform PEM -out certs/ca.cert.crt
+
 
 ### Create intermediate CA
 cd -
@@ -107,3 +110,10 @@ openssl x509 -noout -text -in intermediate/certs/${SERVER_CERT_CN}.cert.pem
 
 # Test certificate
 openssl verify -CAfile intermediate/certs/ca-chain.cert.pem intermediate/certs/${SERVER_CERT_CN}.cert.pem
+
+
+### Bundle output
+tar cvf cert-bundle.tgz \
+    certs/ca.cert.crt \
+    intermediate/certs/ca-chain.cert.pem \
+    intermediate/certs/${SERVER_CERT_CN}.cert.pem

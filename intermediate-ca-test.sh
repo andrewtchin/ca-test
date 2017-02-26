@@ -6,6 +6,15 @@
 SERVER_CERT_CN="starkenterprises.io"
 #####
 
+while getopts ":s:" opt; do
+  case $opt in
+    s) SERVER_CERT_CN="$OPTARG"
+    ;;
+    \?) echo "Invalid option -$OPTARG" >&2
+    ;;
+  esac
+done
+
 
 ### Create root CA
 mkdir -p /root/ca

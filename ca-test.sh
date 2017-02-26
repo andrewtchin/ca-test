@@ -2,9 +2,18 @@
 
 # Generate a root CA, intermediate CA, and a server certificate
 
-##### Configuration options
+##### Default configuration options
 SERVER_CERT_CN="starkenterprises.io"
 #####
+
+while getopts ":s:" opt; do
+  case $opt in
+    s) SERVER_CERT_CN="$OPTARG"
+    ;;
+    \?) echo "Invalid option -$OPTARG" >&2
+    ;;
+  esac
+done
 
 
 ### Create root CA

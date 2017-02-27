@@ -82,6 +82,8 @@ cat intermediate/certs/intermediate.cert.pem \
     certs/ca.cert.pem > intermediate/certs/ca-chain.cert.pem
 chmod 444 intermediate/certs/ca-chain.cert.pem
 
+# Output CRT format
+openssl x509 -in intermediate/certs/intermediate.cert.pem -inform PEM -out intermediate/certs/intermediate.cert.crt
 
 ### Create server certificate
 cd /root/ca
@@ -113,7 +115,10 @@ openssl verify -CAfile intermediate/certs/ca-chain.cert.pem intermediate/certs/$
 
 
 ### Bundle output
-tar cvf cert-bundle.tgz \
-    certs/ca.cert.crt \
-    intermediate/certs/ca-chain.cert.pem \
-    intermediate/certs/${SERVER_CERT_CN}.cert.pem
+mkdir bundle
+cp certs/ca.cert.crt bundle
+cp intermediate/certs/intermediate.cert.crt bundle
+cp intermediate/certs/ca-chain.cert.pem bundle
+cp intermediate/private/${SERVER_CERT_CN}.key.pem bundle
+cp intermediate/certs/${SERVER_CERT_CN}.cert.pem bundle
+tar cvf cert-bundle.tgz bundle

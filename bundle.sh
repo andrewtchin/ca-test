@@ -32,4 +32,5 @@ cd $CA_DIR
 cp certs/$CA_NAME.crt $OUT_DIR
 cp private/${SERVER_CERT_CN}.key.pem $OUT_DIR
 cp certs/${SERVER_CERT_CN}.cert.pem $OUT_DIR
-tar cvf $OUT_FILE $OUT_DIR
+dir=$(dirname $OUT_DIR)
+tar cvf $OUT_FILE -C $dir $OUT_DIR

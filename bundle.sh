@@ -24,7 +24,8 @@ while getopts ":d:f:n:o:" opt; do
   esac
 done
 
-mkdir $OUT_DIR
+mkdir -p $OUT_DIR
+cd $CA_DIR
 cp certs/ca.cert.crt $OUT_DIR
 cp private/${SERVER_CERT_CN}.key.pem $OUT_DIR
 cp certs/${SERVER_CERT_CN}.cert.pem $OUT_DIR

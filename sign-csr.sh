@@ -4,13 +4,13 @@
 
 set -euf -o pipefail
 
-CA_CRT_FILE="certs/START_ENTERPRISES_ROOT_CA.cert.crt"
+CA_NAME="STARK_ENTERPRISES_ROOT_CA" # used to verify cert signature
 OUTDIR="/root/ca"
 SERVER_CERT_CN="starkenterprises.io"
 
 while getopts ":c:d:n:" opt; do
   case $opt in
-    c) CA_CRT_FILE="$OPTARG"
+    c) CA_NAME="$OPTARG"
     ;;
     d) OUTDIR="$OPTARG"
     ;;
@@ -34,4 +34,4 @@ chmod 444 certs/${SERVER_CERT_CN}.cert.pem
 openssl x509 -noout -text -in certs/${SERVER_CERT_CN}.cert.pem
 
 # Test certificate
-openssl verify -CAfile $CA_CRT_FILE certs/${SERVER_CERT_CN}.cert.pem
+openssl verify -CAfile certs/$CA_NAME.crt certs/${SERVER_CERT_CN}.cert.pem

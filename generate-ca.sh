@@ -7,11 +7,11 @@ set -euf -o pipefail
 OUTDIR="/root/ca"
 CA_NAME="STARK_ENTERPRISES_ROOT_CA"
 
-while getopts ":d:n:" opt; do
+while getopts ":c:d:" opt; do
   case $opt in
-    d) OUTDIR="$OPTARG"
+    c) CA_NAME="$OPTARG"
     ;;
-    n) CA_NAME="$OPTARG"
+    d) OUTDIR="$OPTARG"
     ;;
     \?) echo "Invalid option -$OPTARG" >&2
     ;;
@@ -50,4 +50,4 @@ chmod 444 certs/ca.cert.pem
 openssl x509 -noout -text -in certs/ca.cert.pem
 
 # Output CRT format
-openssl x509 -in certs/ca.cert.pem -inform PEM -out certs/$CA_NAME.cert.crt
+openssl x509 -in certs/ca.cert.pem -inform PEM -out certs/$CA_NAME.crt

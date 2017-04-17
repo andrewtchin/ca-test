@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Generate a root CA, intermediate CA, and a server certificate
+# Generate a root CA and a server certificate
 
 ##### Default configuration options
 SERVER_CERT_CN="starkenterprises.io"

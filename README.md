@@ -4,6 +4,10 @@
 
 Generate a root CA and a server certificate
 
+```
+sudo ./ca-test.sh -s example.com
+```
+
 ### intermediate-ca-test.sh
 
 Generate a root CA, intermediate CA, and a server certificate
